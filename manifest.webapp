@@ -1,0 +1,59 @@
+{
+  "name": "The Wall",
+  "description": "Destroy the wall.",
+  "launch_path": "/index.html",
+  "developer": {
+    "name": "Lana",
+    "url": ""
+  },
+  "locales": {
+    "ar": {
+      "name": "The Wall",
+      "description": "Find mysterious number"
+    },
+    "de": {
+      "name": "The Wall",
+      "description": "Find mysterious number"
+    },
+    "el": {
+      "name": "The Wall",
+      "description": "Find mysterious number"
+    },
+    "en-US": {
+      "name": "The Wall",
+      "description": "Find mysterious number"
+    },
+    "es": {
+      "name": "The Wall",
+      "description": "Find mysterious number"
+    },
+    "fr": {
+      "name": "The Wall",
+      "description": "Find mysterious number"
+    },
+    "it": {
+      "name": "The Wall",
+      "description": "Find mysterious number"
+    },
+    "pt-BR": {
+      "name": "The Wall",
+      "description": "Find mysterious number"
+    },
+    "ru": {
+      "name": "The Wall",
+      "description": "Find mysterious number"
+    },
+    "tr": {
+      "name": "The Wall",
+      "description": "Find mysterious number"
+    },
+    "zh-TW": {
+      "name": "The Wall",
+      "description": "Find mysterious number"
+    }
+  },
+  "default_locale": "en-US",
+  "icons": {
+    "128": "/style/icons/Blank.png"
+  }
+}
