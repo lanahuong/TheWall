@@ -9,47 +9,47 @@
   "locales": {
     "ar": {
       "name": "The Wall",
-      "description": "Find mysterious number"
+      "description": "Destroy the wall"
     },
     "de": {
       "name": "The Wall",
-      "description": "Find mysterious number"
+      "description": "Destroy the wall"
     },
     "el": {
       "name": "The Wall",
-      "description": "Find mysterious number"
+      "description": "Destroy the wall"
     },
     "en-US": {
       "name": "The Wall",
-      "description": "Find mysterious number"
+      "description": "Destroy the wall"
     },
     "es": {
       "name": "The Wall",
-      "description": "Find mysterious number"
+      "description": "Destroy the wall"
     },
     "fr": {
       "name": "The Wall",
-      "description": "Find mysterious number"
+      "description": "Destroy the wall"
     },
     "it": {
       "name": "The Wall",
-      "description": "Find mysterious number"
+      "description": "Destroy the wall"
     },
     "pt-BR": {
       "name": "The Wall",
-      "description": "Find mysterious number"
+      "description": "Destroy the wall"
     },
     "ru": {
       "name": "The Wall",
-      "description": "Find mysterious number"
+      "description": "Destroy the wall"
     },
     "tr": {
       "name": "The Wall",
-      "description": "Find mysterious number"
+      "description": "Destroy the wall"
     },
     "zh-TW": {
       "name": "The Wall",
-      "description": "Find mysterious number"
+      "description": "Destroy the wall"
     }
   },
   "default_locale": "en-US",
