@@ -5,11 +5,11 @@
  **/
 
 var Ball = function(game) {
-  this.r = 5;
+  this.r = 5*game.mf.x;
   this.x = (game.w/2)-(this.r);
-  this.y = (game.h/2)+20+this.r;
-  this.dirx = 3;
-  this.diry = 3;
+  this.y = (game.h/2)+20*game.mf.y+this.r;
+  this.dirx = 3*game.mf.x;
+  this.diry = 3*game.mf.y;
   this.speed = 1;
 };
 
@@ -63,11 +63,11 @@ Ball.prototype = {
  * Class Brick
  **/
 
-var Brick = function(x, y, color) {
+var Brick = function(game, x, y, color) {
   this.x = x;
   this.y = y;
-  this.w = 30;
-  this.h = 13;
+  this.w = 30*game.mf.x;
+  this.h = 13*game.mf.y;
   this.color = color;
   this.visible = true;
 };
@@ -89,9 +89,9 @@ Brick.prototype = {
  **/
 
 var Paddle = function(game) {
-  this.w = 50;
-  this.h = 10;
-  this.y = game.h-this.h-70;
+  this.w = 50*game.mf.x;
+  this.h = 10*game.mf.y;
+  this.y = game.h-this.h-70*game.mf.y;
   this.x = (game.w/2)-(this.w/2);
   this.prevX = (game.w/2)-(this.w/2);
 };
@@ -107,7 +107,7 @@ Paddle.prototype = {
   },
 
   move : function(newX, game) {
-    if (newX-this.x <= 25 && newX-this.x >= -25) {
+    if (newX-this.x*game.mf.x <= 25 && newX-this.x >= -25*game.mf.x) {
       this.prevX = this.x;
       this.x = newX;
 
@@ -126,7 +126,8 @@ Paddle.prototype = {
  * Class Game
  **/
 
-var Game = function(canvas) {
+var Game = function(canvas, mf) {
+  this.mf = mf;
   this.canvas = canvas;
   this.w = canvas.width;
   this.h = canvas.height;
@@ -188,21 +189,21 @@ Game.prototype = {
   },
 
   constructLevel : function(levelArray) {
-    var y = 40;
+    var y = 40*this.mf.y;
     var brick = null;
     this.bricksTab = [];
 
     for (var i=0, c=levelArray.length; i<c; i++){
-      var x = 1;
+      var x = 1*this.mf.x;
       //create level's bricks then put in bricksTab
       for (var j=0, d=levelArray[i].length; j<d; j++) {
         if (levelArray[i][j]!==null) {
-          brick = new Brick(x, y, levelArray[i][j]);
+          brick = new Brick(this, x, y, levelArray[i][j]);
           this.bricksTab.push(brick);
         }
-        x += 32;
+        x += 32*this.mf.x;
       }
-      y += 15;
+      y += 15*this.mf.y;
     }
     
     this.drawLevel();
@@ -284,13 +285,13 @@ Game.prototype = {
     this.context.textAlign = "left";
 
     this.context.beginPath();
-    this.context.moveTo(0, this.h-50);
-    this.context.lineTo(this.w, this.h-50);
+    this.context.moveTo(0, this.h-50*this.mf.y);
+    this.context.lineTo(this.w, this.h-50*this.mf.y);
     this.context.stroke();
     
-    this.context.fillText("Level "+this.levelsSetUp[this.currentLevel].number, 5, this.h-35);
-    this.context.fillText("Points :   "+this.points, 5, this.h-20);
-    this.context.fillText("Lives :   "+this.lives, 5, this.h-5);
+    this.context.fillText("Level "+this.levelsSetUp[this.currentLevel].number, 5*this.mf.x, this.h-35*this.mf.y);
+    this.context.fillText("Points :   "+this.points, 5*this.mf.x, this.h-20*this.mf.y);
+    this.context.fillText("Lives :   "+this.lives, 5*this.mf.x, this.h-5*this.mf.y);
   },
 
   loseMsg : function() {
@@ -298,8 +299,8 @@ Game.prototype = {
     this.context.font = "bold 24pt Calibri";
     this.context.textAlign = "center";
 
-    this.context.fillText("You lose...", this.w/2, (this.h/2)-20);
-    this.context.fillText("Play again", this.w/2, (this.h/2)+20);
+    this.context.fillText("You lose...", this.w/2, (this.h/2)-20*this.mf.y);
+    this.context.fillText("Play again", this.w/2, (this.h/2)+20*this.mf.y);
   },
 
   winMsg : function() {
@@ -307,8 +308,8 @@ Game.prototype = {
     this.context.font = "bold 24pt Calibri";
     this.context.textAlign = "center";
 
-    this.context.fillText("You win !", this.w/2, (this.h/2)-20);
-    this.context.fillText("Next level", this.w/2, (this.h/2)+20);
+    this.context.fillText("You win !", this.w/2, (this.h/2)-20*this.mf.y);
+    this.context.fillText("Next level", this.w/2, (this.h/2)+20*this.mf.y);
   },
 
   playAgain : function() {
@@ -331,7 +332,8 @@ Game.prototype = {
  * Class Home
  **/
 
-var Home = function(canvas) {
+var Home = function(canvas, mf) {
+  this.mf = mf;
   this.canvas = canvas;
   this.w = canvas.width;
   this.h = canvas.height;
@@ -354,13 +356,13 @@ Home.prototype = {
       this.choice = [
         {
           name: "Play",
-          brick: new Brick((this.w/2)-40, (this.h/2)-20, R)
+          brick: new Brick(this, (this.w/2)-40*this.mf.x, (this.h/2)-20*this.mf.x, R)
         }
       ];
 
       for(var i=0, c=this.choice.length; i<c; i++) {
-        this.choice[i].brick.w = 80;
-        this.choice[i].brick.h = 40;
+        this.choice[i].brick.w = 80*this.mf.x;
+        this.choice[i].brick.h = 40*this.mf.y;
       }
 
       this.background = [
@@ -371,25 +373,25 @@ Home.prototype = {
         [B,X,X,X,X,B,X,X,X,B]
       ];
 
-      this.paddle.y = this.h-30;
+      this.paddle.y = this.h-30*this.mf.y;
   },
 
   createHome : function(){
-    var y = 1;
+    var y = 1*this.mf.y;
     var brick = null;
 
     // Parse the background array to create the bricks
     for (var i=0, c=this.background.length; i<c; i++) {
-      var x = 1;
+      var x = 1*this.mf.x;
       for (var j=0, d=this.background[i].length; j<d; j++) {
 
         if (this.background[i][j]!==null) {
-          brick = new Brick(x, y, this.background[i][j]);
+          brick = new Brick(this, x, y, this.background[i][j]);
           this.bricksTab.push(brick);
         }
-        x += 32;
+        x += 32*this.mf.x;
       }
-      y += 15;
+      y += 15*this.mf.y;
     }
 
     this.drawHome();  
@@ -410,7 +412,7 @@ Home.prototype = {
      this.context.font = "bold 18pt Calibri";
      this.context.textAlign = "center";
      
-     this.context.fillText(this.choice[j].name, this.w/2, this.h/2+8);
+     this.context.fillText(this.choice[j].name, this.w/2, this.h/2+8*this.mf.y);
    }
 
    this.paddle.draw(this.context);

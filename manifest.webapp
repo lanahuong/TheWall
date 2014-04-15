@@ -2,6 +2,7 @@
   "name": "The Wall",
   "description": "Destroy the wall.",
   "launch_path": "/index.html",
+  "fullscreen": true,
   "developer": {
     "name": "Lana",
     "url": ""

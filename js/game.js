@@ -84,8 +84,29 @@ function refresh() {
   game.drawLevel();
 }
 
+var screenwidth = window.outerWidth*devicePixelRatio;
+var screenheight = window.outerHeight*devicePixelRatio;
 
-var game = new Game(document.getElementById("gamecanvas"));
+var mf = {
+  x: screenwidth /320,
+  y: screenheight /480
+};
+
+var canvas = document.createElement("canvas");
+canvas.id = "gamecanvas";
+canvas.height = screenheight;
+canvas.width = screenwidth;
+canvas.style.position = "absolute";
+canvas.style.bottom = "0px";
+canvas.padding = "0px";
+canvas.style.margin = "0px";
+canvas.style.background = "#000000";
+canvas.style.height = ""+screenheight+"px";
+canvas.style.width = ""+screenwidth+"px";
+
+document.body.appendChild(canvas);
+
+var game = new Game(canvas, mf);
 game.init();
 game.constructLevel(game.levelsSetUp[game.currentLevel].bricks);
 
