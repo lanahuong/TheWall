@@ -134,7 +134,7 @@ var Game = function(canvas, mf) {
   this.context = canvas.getContext("2d");
   this.levelsSetUp = null;
   this.bricksTab = [];
-  this.currentLevel = 0;
+  this.currentLevel = 1;
   this.pointsLevel = 0;
   this.points = 0;
   this.lives = 2;
@@ -148,6 +148,7 @@ Game.prototype = {
     var Y = "#fcec00";
     var G = "#39ff01";
     var B = "#00f3f0";
+    var W = "#ffffff";
     var X = null;
 
     this.levelsSetUp = [
@@ -171,18 +172,49 @@ Game.prototype = {
       number: 2,
       points: 100,
       bricks: [
-        [X,X,X,X,R,R,X,X,X,X],
-        [X,X,X,R,O,O,R,X,X,X],
-        [X,X,R,O,Y,Y,O,R,X,X],
-        [X,R,O,Y,G,G,Y,O,R,X],
-        [R,O,Y,G,B,B,G,Y,O,R],
-        [X,R,O,Y,G,G,Y,O,R,X],
-        [X,X,R,O,Y,Y,O,R,X,X],
-        [X,X,X,R,O,O,R,X,X,X],
-        [X,X,X,X,R,R,X,X,X,X]
+        [X,X,X,X,B,B,X,X,X,X],
+        [X,X,X,B,G,G,B,X,X,X],
+        [X,X,B,G,Y,Y,G,B,X,X],
+        [X,B,G,Y,O,O,Y,G,B,X],
+        [B,G,Y,O,R,R,O,Y,G,B],
+        [X,B,G,Y,O,O,Y,G,B,X],
+        [X,X,B,G,Y,Y,G,B,X,X],
+        [X,X,X,B,G,G,B,X,X,X],
+        [X,X,X,X,B,B,X,X,X,X]
       ]
-    }
-    ];
+    },
+    {
+      number: 3,
+      points: 120,
+      bricks: [
+        [R,O,Y,G,B,B,G,Y,O,R],
+        [O,Y,G,B,X,X,B,G,Y,O],
+        [Y,G,B,X,X,X,X,B,G,Y],
+        [G,B,X,X,X,X,X,X,B,G],
+        [B,X,X,X,R,R,X,X,X,B],
+        [G,B,X,X,X,X,X,X,B,G],
+        [Y,G,B,X,X,X,X,B,G,Y],
+        [O,Y,G,B,X,X,B,G,Y,O],
+        [R,O,Y,G,B,B,G,Y,O,R]
+      ]
+    },
+    {
+      number: 4,
+      points: 120,
+      bricks: [
+        [X,X,X,Y,Y,Y,Y,X,X,X],
+        [X,X,X,Y,Y,Y,Y,X,X,X],
+        [X,X,Y,Y,Y,Y,Y,Y,X,X],
+        [X,Y,Y,Y,Y,Y,X,Y,Y,X],
+        [X,Y,Y,Y,Y,Y,Y,Y,Y,X],
+        [X,Y,Y,Y,Y,Y,Y,Y,Y,X],
+        [X,Y,Y,Y,Y,Y,Y,Y,X,X],
+        [X,Y,Y,Y,Y,X,X,X,X,X],
+        [X,X,Y,Y,Y,Y,X,X,X,X],
+        [X,X,X,Y,Y,Y,Y,X,X,X],
+        [X,X,X,Y,Y,Y,Y,X,X,X]
+      ]
+    }];
 
     this.paddle = new Paddle(this);
     this.ball = new Ball(this);
