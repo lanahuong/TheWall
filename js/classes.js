@@ -107,7 +107,7 @@ Paddle.prototype = {
   },
 
   move : function(newX, game) {
-    if (newX-this.x*game.mf.x <= 25 && newX-this.x >= -25*game.mf.x) {
+    if (newX-this.x <= 30*game.mf.x && newX-this.x >= -30*game.mf.x) {
       this.prevX = this.x;
       this.x = newX;
 
