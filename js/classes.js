@@ -347,6 +347,7 @@ Game.prototype = {
   playAgain : function() {
     this.ball = new Ball(this);
     this.points = 0;
+    this.pointsLevel = 0;
     this.lives = 2;
     this.currentLevel = 1;
     this.constructLevel(this.levelsSetUp[this.currentLevel].bricks);
