@@ -46,8 +46,9 @@ function refresh() {
     game.start = false;
     game.winMsg();
     
-    if (touchMove[1] <= (game.h/2)+20 && touchMove[1] >= (game.h/2)-10 &&
-        touchMove[0] >= 90 && touchMove[0] <= game.w-90) {
+    if (touchMove[1] <= (game.h/2)+20*game.mf.y &&
+        touchMove[1] >= (game.h/2)-10*game.mf.y &&
+        touchMove[0] >= 90*game.mf.x && touchMove[0] <= game.w-90*game.mf.x) {
       game.nextLevel();
       setTimeout(function() { game.start = true; }, 3000);
     }
@@ -60,8 +61,9 @@ function refresh() {
     if (game.lives === 0) {
       game.loseMsg();
 
-      if (touchMove[1] <= (game.h/2)+20 && touchMove[1] >= (game.h/2)-10 &&
-          touchMove[0] >= 90 && touchMove[0] <= game.w-90) {
+      if (touchMove[1] <= (game.h/2)+20*game.mf.y &&
+          touchMove[1] >= (game.h/2)-10*game.mf.y &&
+          touchMove[0] >= 90*game.mf.x && touchMove[0] <= game.w-90*game.mf.x) {
         game.playAgain();
         setTimeout(function() { game.start = true; }, 3000);
       }
