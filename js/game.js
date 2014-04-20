@@ -84,6 +84,7 @@ function refresh() {
   
   // Draw the whole screen
   game.drawLevel();
+  requestAnimationFrame(refresh);
 }
 
 var screenwidth = window.outerWidth*devicePixelRatio;
@@ -120,6 +121,6 @@ game.canvas.addEventListener("touchmove", function(event) {
 }, false);
 
 setTimeout(function() { game.start = true; }, 3000);
-setInterval(refresh, 10);
+requestAnimationFrame(refresh);
 
 }());
