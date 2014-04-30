@@ -272,7 +272,7 @@ Game.prototype = {
   collidePaddle : function() {
     //test collision with the paddle
     if (this.ball.y+this.ball.r >= this.paddle.y &&
-        this.ball.y < this.paddle.y) {
+        this.ball.y-this.ball.r < this.paddle.y) {
 
       if(this.ball.x-this.ball.r <= this.paddle.x+this.paddle.w &&
          this.ball.x+this.ball.r >= this.paddle.x) {
