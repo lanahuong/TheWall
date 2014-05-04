@@ -229,7 +229,7 @@ Game.prototype = {
 
     this.paddle.draw(this.context);
 
-    if (this.ball.y-this.ball.r <= this.paddle.y-this.paddle.h) {
+    if (this.ball.y-this.ball.r <= this.paddle.y+this.paddle.h) {
       this.ball.draw(this.context);
     }
   },
@@ -286,7 +286,7 @@ Game.prototype = {
   },
 
   drawInfo : function() {
-    this.context.clearRect(0, this.h-48, this.w, 48);
+    this.context.clearRect(0, Math.round(this.h-48*this.mf.y), this.w, Math.round(48*this.mf.y));
     
     this.context.fillStyle = "white";
     this.context.strokeStyle = "white";

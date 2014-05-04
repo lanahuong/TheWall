@@ -3,7 +3,7 @@
 (function() {
 
 function refresh() {
-  game.context.clearRect(0, 0, game.w, game.h-51);
+  game.context.clearRect(0, 0, game.w, Math.round(game.h-51*game.mf.y));
   
   // Test collision with the paddle
   if (game.collidePaddle()) {
