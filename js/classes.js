@@ -30,33 +30,11 @@ Ball.prototype = {
     this.y += this.diry*this.speed;
   },
 
-  inverseDirX : function() {
-    this.dirx *= -1;
-  },
-
-  inverseDirY : function() {
-    this.diry *= -1;
-  },
-
-  changeAngle : function(paddle) {
-    if (paddle.prevX < paddle.x) {
-      if (this.dirx < this.diry) {
-        this.diry--;
-      } else {
-        this.diry++;
-      }
-    }
-
-    if (paddle.prevX > paddle.x) {
-      if (this.dirx < this.diry) {
-        this.diry++;
-        this.dirx--;
-      } else {
-        this.diry--;
-        this.dix++;
-      }
-    }
-
+  changeAngle : function(paddle, mf) {
+    this.dirx = 12*mf.x*((this.x-(paddle.x+paddle.w/2))/paddle.w);
+    var norme = Math.sqrt((this.dirx*this.dirx)+(this.diry*this.diry));
+    this.diry = this.diry*6*mf.x/norme;
+    this.dirx = this.dirx*6*mf.x/norme;
   }
 };
 /**

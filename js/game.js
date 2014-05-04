@@ -7,16 +7,16 @@ function refresh() {
   
   // Test collision with the paddle
   if (game.collidePaddle()) {
-    game.ball.inverseDirY();
-    game.ball.changeAngle(game.paddle);
+    game.ball.diry = -game.ball.diry;
+    game.ball.changeAngle(game.paddle, game.mf);
   }
   
   // Test collision with the screen margins
   if (game.collideBorder()) {
-    game.ball.inverseDirX();
+    game.ball.dirx = -game.ball.dirx;
   }
   if (game.collideTop()) {
-    game.ball.inverseDirY();
+    game.ball.diry = -game.ball.diry;
   }
   
   // Test collision with the bricks one by one
@@ -25,14 +25,14 @@ function refresh() {
       var collide = game.collideBrick(game.bricksTab[i]);
       
       if (collide == "top" || collide == "bottom") {
-        game.ball.inverseDirY();
+        game.ball.diry = -game.ball.diry;
         game.bricksTab[i].visible = false;
         game.pointsLevel += 2;
         game.points += 2;
         game.drawInfo();
       }
       if (collide == "left" || collide == "right") {
-        game.ball.inverseDirX();
+        game.ball.dirx = -game.ball.dirx;
         game.bricksTab[i].visible = false;
         game.pointsLevel += 2;
         game.pointLevel +=2;
