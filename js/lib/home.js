@@ -90,4 +90,3 @@ Home.prototype = {
    this.paddle.draw(this.context);
   }
 };
-
