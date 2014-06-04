@@ -138,13 +138,15 @@ Game.prototype = {
     if (this.ball.x+this.ball.r >= this.w ||
         this.ball.x-this.ball.r <= 0) {
       return true;
-    } else { return false; }
+    }
+    return false;
   },
 
   collideTop : function() {
     if (this.ball.y-this.ball.r <= 0) {
       return true;
-    } else { return false; }
+    }
+    return false;
   },
 
   collidePaddle : function() {
@@ -155,14 +157,33 @@ Game.prototype = {
       if(this.ball.x-this.ball.r <= this.paddle.x+this.paddle.w &&
          this.ball.x+this.ball.r >= this.paddle.x) {
         return true;
-      } else { return false; }
-    } else { return false; }
+      }
+      return false;
+    }
+    return false;
   },
 
   collideBrick : function(brick) {
+    // Test if the ball collides the brick and on which side
+
+    // Calculate the squared vectors from the ball to the corners of the brick
+    var vecTL = (brick.x-this.ball.x)*(brick.x-this.ballx)+(brick.y-this.ball.y)*(brick.y-this.ball.y);
+    var vecTR = (brick.x+brick.w-this.ball.x)*(brick.x+brick.w-this.ball.x)+(brick.y-this.ball.y)*(brick.y-this.ball.y);
+    var vecBL = (brick.x-this.ball.x)*(brick.x-this.ballx)+(brick.y+brick.h-this.ball.y)*(brick.y+brick.h-this.ball.y);
+    var vecBR = (brick.x+brick.w-this.ball.x)*(brick.x+brick.w-this.ball.x)+(brick.y+brick.h-this.ball.y)*(brick.y+brick.h-this.ball.y);
+    
+    // If the squared vectors are smaller than the squared radius of the ball there is a collision
+    if (vecTL <= this.ball.r*this.ball.r ||
+        vecTR <= this.ball.r*this.ball.r ||
+        vecBL <= this.ball.r*this.ball.r ||
+        vecBR <= this.ball.r*this.ball.r) {
+
+      return "corner";
+    }
+
     if (this.ball.x >= brick.x &&
         this.ball.x <= brick.x+brick.w) {
-  
+      
       if (this.ball.y+this.ball.r >= brick.y &&
           this.ball.y < brick.y) {
         return "top";
@@ -171,6 +192,7 @@ Game.prototype = {
           this.ball.y > brick.y+brick.h) {
         return "bottom";
       }
+      
     } else if (this.ball.y >= brick.y &&
                this.ball.y <= brick.y+brick.h) {
       
@@ -182,7 +204,7 @@ Game.prototype = {
           this.ball.x > brick.x+brick.w) {
         return "right";
       }
-    } else { return null; }
+    return null;
   },
 
   drawInfo : function() {

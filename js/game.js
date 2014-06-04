@@ -20,10 +20,19 @@ function refresh() {
   }
   
   // Test collision with the bricks one by one
+  // Erease the brick, revers the angle and add points if needed
   for (var i=0, c=game.bricksTab.length; i<c; i++) {
     if (game.bricksTab[i].visible === true) {
       var collide = game.collideBrick(game.bricksTab[i]);
       
+      if (collide == "corner") {
+        game.ball.diry = -game.ball.diry;
+        game.ball.dirx = -game.ball.dirx;
+        game.bricksTab[i].visible = false;
+        game.pointsLevel += 2;
+        game.points += 2;
+        game.drawInfo();
+      }
       if (collide == "top" || collide == "bottom") {
         game.ball.diry = -game.ball.diry;
         game.bricksTab[i].visible = false;
