@@ -17,32 +17,43 @@ var Home = function(canvas, mf) {
 };
 
 Home.prototype = {
-    init : function () {
-      var R = "#e0002a";
-      var O = "#ff7c00";
-      var Y = "#fcec00";
-      var G = "#39ff01";
-      var B = "#00f3f0";
-      var X = null;
+  init : function () {
+    var r = {
+      color: ["#e0002a"],
+      lives: 1};
+    var o = {
+      color: ["#ff7c00"],
+      lives: 1};
+    var y = {
+      color: ["#fcec00"],
+      lives: 1};
+    var g = {
+      color: ["#39ff01"],
+      lives: 1};
+    var b = {
+      color: ["#00f3f0"],
+      lives: 1};
+    var X = null;
 
-      this.choice = [
-        {
-          name: "Play",
-          brick: new Brick(this, (this.w/2)-40*this.mf.x, (this.h/2)-20*this.mf.x, R)
-        }
-      ];
 
-      for(var i=0, c=this.choice.length; i<c; i++) {
-        this.choice[i].brick.w = 80*this.mf.x;
-        this.choice[i].brick.h = 40*this.mf.y;
+    this.choice = [
+      {
+        name: "Play",
+        brick: new Brick(this, (this.w/2)-40*this.mf.x, (this.h/2)-20*this.mf.x, r)
       }
+    ];
+
+    for(var i=0, c=this.choice.length; i<c; i++) {
+      this.choice[i].brick.w = 80*this.mf.x;
+      this.choice[i].brick.h = 40*this.mf.y;
+    }
 
       this.background = [
-        [R,R,R,R,X,X,R,R,R,R],
-        [O,O,O,X,X,X,X,O,O,O],
-        [Y,Y,Y,X,X,X,Y,X,Y,Y],
-        [G,G,X,G,X,X,X,G,G,G],
-        [B,X,X,X,X,B,X,X,X,B]
+        [r,r,r,r,X,X,r,r,r,r],
+        [o,o,o,X,X,X,X,o,o,o],
+        [y,y,y,X,X,X,y,X,y,y],
+        [g,g,X,g,X,X,X,g,g,g],
+        [b,X,X,X,X,b,X,X,X,b]
       ];
 
       this.paddle.y = this.h-30*this.mf.y;

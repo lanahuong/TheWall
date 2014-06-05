@@ -4,12 +4,15 @@
  * Class Brick
  **/
 
-var Brick = function(game, x, y, color) {
+var Brick = function(game, x, y, settings) {
   this.x = x;
   this.y = y;
   this.w = 30*game.mf.x;
   this.h = 13*game.mf.y;
-  this.color = color;
+  this.tabColor = settings.color;
+  this.numColor = 0;
+  this.color = this.tabColor[this.numColor];
+  this.lives = settings.lives;
   this.visible = true;
 };
 

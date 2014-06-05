@@ -21,64 +21,88 @@ var Game = function(canvas, mf) {
 
 Game.prototype = {
   init : function() {
-    var R = "#e0002a";
-    var O = "#ff7c00";
-    var Y = "#fcec00";
-    var G = "#39ff01";
-    var B = "#00f3f0";
-    var W = "#ffffff";
+    var r = {
+      color: ["#e0002a"],
+      lives: 1};
+    var o = {
+      color: ["#ff7c00"],
+      lives: 1};
+    var y = {
+      color: ["#fcec00"],
+      lives: 1};
+    var g = {
+      color: ["#39ff01"],
+      lives: 1};
+    var b = {
+      color: ["#00f3f0"],
+      lives: 1};
+    var R = {
+      color: ["#a61a00", "#e0002a"],
+      lives: 2};
+    var O = {
+      color: ["#c36812", "#ff7c00"],
+      lives: 2};
+    var Y = {
+      color: ["#c4ba17","#fcec00"],
+      lives: 2};
+    var G = {
+      color: ["#339900", "#39ff01"],
+      lives: 2};
+    var B = {
+      color: ["#009999", "#00f3f0"],
+      lives: 2};
     var X = null;
 
     this.levelsSetUp = [
     {
       number: 0,
       points: 2,
-      bricks: [[X,R]]
+      bricks: [[X,r]]
     },
     {
       number: 1,
       points: 100,
       bricks: [
-        [R,R,R,R,R,R,R,R,R,R],
-        [O,O,O,O,O,O,O,O,O,O],
-        [Y,Y,Y,Y,Y,Y,Y,Y,Y,Y],
-        [G,G,G,G,G,G,G,G,G,G],
-        [B,B,B,B,B,B,B,B,B,B]
+        [r,r,r,r,r,r,r,r,r,r],
+        [o,o,o,o,o,o,o,o,o,o],
+        [y,y,y,y,y,y,y,y,y,y],
+        [g,g,g,g,g,g,g,g,g,g],
+        [b,b,b,b,b,b,b,b,b,b]
       ]
     },
     {
       number: 2,
-      points: 100,
+      points: 148,
       bricks: [
         [X,X,X,X,B,B,X,X,X,X],
-        [X,X,X,B,G,G,B,X,X,X],
-        [X,X,B,G,Y,Y,G,B,X,X],
-        [X,B,G,Y,O,O,Y,G,B,X],
-        [B,G,Y,O,R,R,O,Y,G,B],
-        [X,B,G,Y,O,O,Y,G,B,X],
-        [X,X,B,G,Y,Y,G,B,X,X],
-        [X,X,X,B,G,G,B,X,X,X],
+        [X,X,X,B,g,g,B,X,X,X],
+        [X,X,B,g,y,y,g,B,X,X],
+        [X,B,g,y,O,O,y,g,B,X],
+        [B,g,y,O,r,r,O,y,g,B],
+        [X,B,g,y,O,O,y,g,B,X],
+        [X,X,B,g,y,y,g,B,X,X],
+        [X,X,X,B,g,g,B,X,X,X],
         [X,X,X,X,B,B,X,X,X,X]
       ]
     },
     {
       number: 3,
-      points: 120,
+      points: 164,
       bricks: [
-        [R,O,Y,G,B,B,G,Y,O,R],
-        [O,Y,G,B,X,X,B,G,Y,O],
-        [Y,G,B,X,X,X,X,B,G,Y],
-        [G,B,X,X,X,X,X,X,B,G],
-        [B,X,X,X,R,R,X,X,X,B],
-        [G,B,X,X,X,X,X,X,B,G],
-        [Y,G,B,X,X,X,X,B,G,Y],
-        [O,Y,G,B,X,X,B,G,Y,O],
-        [R,O,Y,G,B,B,G,Y,O,R]
+        [R,o,y,G,b,b,G,y,o,R],
+        [o,y,G,b,X,X,b,G,y,o],
+        [y,G,b,X,X,X,X,b,G,y],
+        [G,b,X,X,X,X,X,X,b,G],
+        [b,X,X,X,R,R,X,X,X,b],
+        [G,b,X,X,X,X,X,X,b,G],
+        [y,G,b,X,X,X,X,b,G,y],
+        [o,y,G,b,X,X,b,G,y,o],
+        [R,o,y,G,b,b,G,y,o,R]
       ]
     },
     {
       number: 4,
-      points: 120,
+      points: 240,
       bricks: [
         [X,X,X,Y,Y,Y,Y,X,X,X],
         [X,X,X,Y,Y,Y,Y,X,X,X],
@@ -204,7 +228,8 @@ Game.prototype = {
           this.ball.x > brick.x+brick.w) {
         return "right";
       }
-    return null;
+      return null;
+    }
   },
 
   drawInfo : function() {

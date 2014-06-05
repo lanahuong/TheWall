@@ -35,17 +35,24 @@ function refresh() {
       }
       if (collide == "top" || collide == "bottom") {
         game.ball.diry = -game.ball.diry;
-        game.bricksTab[i].visible = false;
+        game.bricksTab[i].lives --;
+        game.bricksTab[i].numColor ++;
         game.pointsLevel += 2;
         game.points += 2;
         game.drawInfo();
       }
       if (collide == "left" || collide == "right") {
         game.ball.dirx = -game.ball.dirx;
-        game.bricksTab[i].visible = false;
+        game.bricksTab[i].lives --;
+        game.bricksTab[i].numColor ++;
         game.pointsLevel += 2;
         game.pointLevel +=2;
         game.drawInfo();
+      }
+      if (game.bricksTab[i].lives === 0) {
+        game.bricksTab[i].visible = false;
+      } else {
+        game.bricksTab[i].color = game.bricksTab[i].tabColor[game.bricksTab[i].numColor];
       }
     }
   }
