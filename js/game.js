@@ -18,6 +18,18 @@ function refresh() {
   if (game.collideTop()) {
     game.ball.diry = -game.ball.diry;
   }
+  // If there is a bonus, test if the player touch it
+  for (var j=0, d=game.bonusTab.length; j<d; j++) {
+    var bonus = game.bonusTab[j];
+    if (bonus.type == "life" && bonus.visible) {
+      if (game.ball.x+game.ball.r >= bonus.x &&
+          game.ball.x-game.ball.r <= bonus.x+bonus.img.width &&
+          game.ball.y+game.ball.r <= bonus.y+bonus.img.height &&
+          game.ball.y-game.ball.r >= bonus.y) {
+        bonus.lifeUp(game); 
+      }
+    }
+  }
   
   // Test collision with the bricks one by one
   // Erease the brick, revers the angle and add points if needed
@@ -49,7 +61,9 @@ function refresh() {
         game.pointLevel +=2;
         game.drawInfo();
       }
+      // Check if the brick is completly destroyed and see for bonus
       if (game.bricksTab[i].lives === 0) {
+        game.hiddenObject(i);
         game.bricksTab[i].visible = false;
       } else {
         game.bricksTab[i].color = game.bricksTab[i].tabColor[game.bricksTab[i].numColor];
@@ -127,7 +141,7 @@ document.body.appendChild(canvas);
 
 var game = new Game(canvas, mf);
 game.init();
-game.constructLevel(game.levelsSetUp[game.currentLevel].bricks);
+game.buildLevel(game.levelsSetUp[game.currentLevel].bricks);
 
 var touchMove = [game.w/2, 0];
 

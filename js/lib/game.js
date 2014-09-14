@@ -17,6 +17,7 @@ var Game = function(canvas, mf) {
   this.points = 0;
   this.lives = 2;
   this.start = false;
+  this.bonusTab = [];
 };
 
 Game.prototype = {
@@ -122,14 +123,14 @@ Game.prototype = {
     this.ball = new Ball(this);
   },
 
-  constructLevel : function(levelArray) {
+  buildLevel : function(levelArray) {
     var y = 40*this.mf.y;
     var brick = null;
     this.bricksTab = [];
 
     for (var i=0, c=levelArray.length; i<c; i++){
       var x = 1*this.mf.x;
-      //create level's bricks then put in bricksTab
+      //Create level's bricks then put in bricksTab
       for (var j=0, d=levelArray[i].length; j<d; j++) {
         if (levelArray[i][j]!==null) {
           brick = new Brick(this, x, y, levelArray[i][j]);
@@ -139,12 +140,49 @@ Game.prototype = {
       }
       y += 15*this.mf.y;
     }
+
+    //Determine the bonus
+    var pts = this.levelsSetUp[this.currentLevel].points;
+    var bricks = this.bricksTab.length;
+    var b1 = Math.floor((Math.random()*bricks+1));
+    var b2 = Math.floor((Math.random()*bricks+1));
+    var b3 = Math.floor((Math.random()*bricks+1));
+
+    while (b2==b3) {
+      b2 = Math.floor((Math.random()*bricks+1));
+    }
+    while (b1==b2 || b1==b3) {
+      b1 = Math.floor((Math.random()*bricks+1));
+    }
+    this.bonusTab = [
+      new Bonus("life", "+1", this.bricksTab[b1], b1, this),
+      new Bonus("life", "+1", this.bricksTab[b2], b2, this),
+      new Bonus("speedUp", "Speed up !", this.bricksTab[b3], b3, this)
+    ];
+
+    if (pts > 200) {
+      var b4 = Math.floor((Math.random()*bricks+1));
+      while (b4==b1 || b4==b2 || b4==b3) {
+        b4 = Math.floor((Math.random()*bricks+1));
+      }
+      this.bonusTab.push(new Bonus("speedUp", "Speed up !", this.bricksTab[b4], b4, this));
+
+      if (pts > 300) {
+        var b5 = Math.floor((Math.random()*bricks+1));
+        while (b5==b1 || b5==b2 || b5==b3 || b5==b4) {
+          b5 = Math.floor((Math.random()*bricks+1));
+        }
+        this.bonusTab.push(new Bonus("life", "+1", this.bricksTab[b5], b5, this));
+      }
+    }
+
     
     this.drawLevel();
     this.drawInfo();
   },
 
   drawLevel : function() {
+    // Draw the bricks
     for (var i=0, c=this.bricksTab.length; i<c; i++) {
       if (this.bricksTab[i].visible === true) {
         this.bricksTab[i].draw(this.context);
@@ -155,6 +193,21 @@ Game.prototype = {
 
     if (this.ball.y-this.ball.r <= this.paddle.y+this.paddle.h) {
       this.ball.draw(this.context);
+    }
+    // Draw the objects notifications
+    for (var j=0, d=this.bonusTab.length; j<d; j++) {
+      var bonus = this.bonusTab[j];
+      if(bonus.visible && !bonus.used){
+        var side = 13*this.mf.x;
+          this.context.drawImage(bonus.img, bonus.x+(bonus.img.width/2)-(side/2), bonus.y, side, side);
+      }
+      if(bonus.note === true){
+        this.context.fillStyle = "white";
+        this.context.font = "bold 12pt Calibri";
+        this.context.textAlign = "center";
+
+        this.context.fillText(bonus.msg, bonus.x, bonus.y);  
+      }
     }
   },
 
@@ -191,6 +244,7 @@ Game.prototype = {
     // Test if the ball collides the brick and on which side
 
     // Calculate the squared vectors from the ball to the corners of the brick
+    // TopLeft, TopRight, BottomLeft, BottomRight
     var vecTL = (brick.x-this.ball.x)*(brick.x-this.ballx)+(brick.y-this.ball.y)*(brick.y-this.ball.y);
     var vecTR = (brick.x+brick.w-this.ball.x)*(brick.x+brick.w-this.ball.x)+(brick.y-this.ball.y)*(brick.y-this.ball.y);
     var vecBL = (brick.x-this.ball.x)*(brick.x-this.ballx)+(brick.y+brick.h-this.ball.y)*(brick.y+brick.h-this.ball.y);
@@ -274,14 +328,33 @@ Game.prototype = {
     this.points = 0;
     this.pointsLevel = 0;
     this.lives = 2;
+    this.bonusTab = [];
     this.currentLevel = 1;
-    this.constructLevel(this.levelsSetUp[this.currentLevel].bricks);
+    this.buildLevel(this.levelsSetUp[this.currentLevel].bricks);
   },
 
   nextLevel : function() {
     this.currentLevel++;
     this.pointsLevel = 0;
+    this.lives++;
     this.ball = new Ball(this);
-    this.constructLevel(this.levelsSetUp[this.currentLevel].bricks);
+    this.bonusTab = [];
+    this.buildLevel(this.levelsSetUp[this.currentLevel].bricks);
+  },
+
+  hiddenObject : function(brick) {
+    for (var i=0, c=this.bonusTab.length; i<c; i++) {
+      if (this.bonusTab[i].brickNum == brick &&
+          !this.bonusTab[i].used) {
+
+        this.bonusTab[i].visible = true;
+
+        if (this.bonusTab[i].type == "speedUp") {
+          this.bonusTab[i].used = true;
+          this.bonusTab[i].speedUp(this);
+        }
+
+      }
+    }
   }
 };
