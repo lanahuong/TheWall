@@ -199,7 +199,7 @@ Game.prototype = {
       var bonus = this.bonusTab[j];
       if(bonus.visible && !bonus.used){
         var side = 13*this.mf.x;
-          this.context.drawImage(bonus.img, bonus.x+(bonus.img.width/2)-(side/2), bonus.y, side, side);
+        this.context.drawImage(bonus.img, bonus.x+(bonus.img.width/2)-(side/2), bonus.y, side, side);
       }
       if(bonus.note === true){
         this.context.fillStyle = "white";

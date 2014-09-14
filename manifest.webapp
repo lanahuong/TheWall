@@ -3,8 +3,9 @@
   "description": "Destroy the wall.",
   "launch_path": "/index.html",
   "fullscreen": true,
+    "orientation": "portrait-primary",
   "developer": {
-    "name": "Lana",
+    "name": "Lana Huong Scravaglieri",
     "url": ""
   },
   "locales": {
@@ -55,6 +56,7 @@
   },
   "default_locale": "en-US",
   "icons": {
-    "128": "/style/icons/Blank.png"
+    "128": "/ressources/icons/the_wall_icon_128.png",
+    "60": "/ressources/icons/the_wall_icon_60.png"
   }
 }
