@@ -145,10 +145,13 @@ game.buildLevel(game.levelsSetUp[game.currentLevel].bricks);
 
 var touchMove = [game.w/2, 0];
 
-game.canvas.addEventListener("touchmove", function(event) {
+var getCoor =  function(event) {
   touchMove[0] = event.changedTouches[0].clientX;
   touchMove[1] = event.changedTouches[0].clientY;
-}, false);
+};
+
+game.canvas.addEventListener("touchstart", getCoor, false);
+game.canvas.addEventListener("touchmove", getCoor, false);
 
 setTimeout(function() { game.start = true; }, 3000);
 requestAnimationFrame(refresh);
