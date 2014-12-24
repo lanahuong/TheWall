@@ -39,13 +39,13 @@ Home.prototype = {
     this.choice = [
       {
         name: "Play",
-        brick: new Brick(this, (this.w/2)-40*this.mf.x, (this.h/2)-20*this.mf.x, r)
+        brick: new Brick(this, (this.w/2)-50, (this.h/2)-30, r)
       }
     ];
 
     for(var i=0, c=this.choice.length; i<c; i++) {
-      this.choice[i].brick.w = 80*this.mf.x;
-      this.choice[i].brick.h = 40*this.mf.y;
+      this.choice[i].brick.w = 100;
+      this.choice[i].brick.h = 60;
     }
 
       this.background = [
@@ -56,25 +56,25 @@ Home.prototype = {
         [b,X,X,X,X,b,X,X,X,b]
       ];
 
-      this.paddle.y = this.h-30*this.mf.y;
+      this.paddle.y = this.h-30;
   },
 
   createHome : function(){
-    var y = 1*this.mf.y;
+    var y = 1;
     var brick = null;
 
     // Parse the background array to create the bricks
     for (var i=0, c=this.background.length; i<c; i++) {
-      var x = 1*this.mf.x;
+      var x = 1;
       for (var j=0, d=this.background[i].length; j<d; j++) {
 
         if (this.background[i][j]!==null) {
           brick = new Brick(this, x, y, this.background[i][j]);
           this.bricksTab.push(brick);
         }
-        x += 32*this.mf.x;
+        x += 32;
       }
-      y += 15*this.mf.y;
+      y += 15;
     }
 
     this.drawHome();  
@@ -95,7 +95,7 @@ Home.prototype = {
      this.context.font = "bold 18pt Calibri";
      this.context.textAlign = "center";
      
-     this.context.fillText(this.choice[j].name, this.w/2, this.h/2+8*this.mf.y);
+     this.context.fillText(this.choice[j].name, this.w/2, this.h/2+8);
    }
 
    this.paddle.draw(this.context);

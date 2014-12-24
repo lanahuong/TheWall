@@ -56,7 +56,7 @@
   },
   "default_locale": "en-US",
   "icons": {
-    "128": "/ressources/icons/the_wall_icon_128.png",
-    "60": "/ressources/icons/the_wall_icon_60.png"
+    "128": "/resources/icons/the_wall_icon_128.png",
+    "60": "/resources/icons/the_wall_icon_60.png"
   }
 }

@@ -1,8 +1,8 @@
 "use strict";
 (function() {
 
-var screenwidth = window.outerWidth*devicePixelRatio;
-var screenheight = window.outerHeight*devicePixelRatio;
+var screenwidth = window.innerWidth;
+var screenheight = window.innerHeight;
 
 var mf = {
   x: screenwidth /320,

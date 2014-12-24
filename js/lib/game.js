@@ -4,7 +4,7 @@
  * Class Game
  **/
 
-var Game = function(canvas, mf) {
+var Game = function(canvas, mf, audio) {
   this.mf = mf;
   this.canvas = canvas;
   this.w = canvas.width;
@@ -18,6 +18,7 @@ var Game = function(canvas, mf) {
   this.lives = 2;
   this.start = false;
   this.bonusTab = [];
+  this.audio = audio;
 };
 
 Game.prototype = {
@@ -124,21 +125,21 @@ Game.prototype = {
   },
 
   buildLevel : function(levelArray) {
-    var y = 40*this.mf.y;
+    var y = 40;
     var brick = null;
     this.bricksTab = [];
 
     for (var i=0, c=levelArray.length; i<c; i++){
-      var x = 1*this.mf.x;
+      var x = 1;
       //Create level's bricks then put in bricksTab
       for (var j=0, d=levelArray[i].length; j<d; j++) {
         if (levelArray[i][j]!==null) {
           brick = new Brick(this, x, y, levelArray[i][j]);
           this.bricksTab.push(brick);
         }
-        x += 32*this.mf.x;
+        x += 32;
       }
-      y += 15*this.mf.y;
+      y += 15;
     }
 
     //Determine the bonus
@@ -198,7 +199,7 @@ Game.prototype = {
     for (var j=0, d=this.bonusTab.length; j<d; j++) {
       var bonus = this.bonusTab[j];
       if(bonus.visible && !bonus.used){
-        var side = 13*this.mf.x;
+        var side = 13;
         this.context.drawImage(bonus.img, bonus.x+(bonus.img.width/2)-(side/2), bonus.y, side, side);
       }
       if(bonus.note === true){
@@ -287,7 +288,7 @@ Game.prototype = {
   },
 
   drawInfo : function() {
-    this.context.clearRect(0, Math.round(this.h-48*this.mf.y), this.w, Math.round(48*this.mf.y));
+    this.context.clearRect(0, Math.round(this.h-48), this.w, Math.round(48));
     
     this.context.fillStyle = "white";
     this.context.strokeStyle = "white";
@@ -296,13 +297,13 @@ Game.prototype = {
     this.context.textAlign = "left";
 
     this.context.beginPath();
-    this.context.moveTo(0, this.h-50*this.mf.y);
-    this.context.lineTo(this.w, this.h-50*this.mf.y);
+    this.context.moveTo(0, this.h-50);
+    this.context.lineTo(this.w, this.h-50);
     this.context.stroke();
     
-    this.context.fillText("Level "+this.levelsSetUp[this.currentLevel].number, 5*this.mf.x, this.h-35*this.mf.y);
-    this.context.fillText("Points :   "+this.points, 5*this.mf.x, this.h-20*this.mf.y);
-    this.context.fillText("Lives :   "+this.lives, 5*this.mf.x, this.h-5*this.mf.y);
+    this.context.fillText("Level "+this.levelsSetUp[this.currentLevel].number, 5, this.h-35);
+    this.context.fillText("Points :   "+this.points, 5, this.h-20);
+    this.context.fillText("Lives :   "+this.lives, 5, this.h-5);
   },
 
   loseMsg : function() {
@@ -310,8 +311,8 @@ Game.prototype = {
     this.context.font = "bold 24pt Calibri";
     this.context.textAlign = "center";
 
-    this.context.fillText("You lose...", this.w/2, (this.h/2)-20*this.mf.y);
-    this.context.fillText("Play again", this.w/2, (this.h/2)+20*this.mf.y);
+    this.context.fillText("You lose...", this.w/2, (this.h/2)-20);
+    this.context.fillText("Play again", this.w/2, (this.h/2)+20);
   },
 
   winMsg : function() {
@@ -319,8 +320,8 @@ Game.prototype = {
     this.context.font = "bold 24pt Calibri";
     this.context.textAlign = "center";
 
-    this.context.fillText("You win !", this.w/2, (this.h/2)-20*this.mf.y);
-    this.context.fillText("Next level", this.w/2, (this.h/2)+20*this.mf.y);
+    this.context.fillText("You win !", this.w/2, (this.h/2)-20);
+    this.context.fillText("Next level", this.w/2, (this.h/2)+20);
   },
 
   playAgain : function() {
@@ -356,5 +357,13 @@ Game.prototype = {
 
       }
     }
+  },
+
+  sound_wall : function() {
+    this.audio.wall.play();
+  },
+
+  sound_brick : function() {
+    this.audio.brick.play();
   }
 };

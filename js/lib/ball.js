@@ -5,12 +5,12 @@
  **/
 
 var Ball = function(game) {
-  this.r = 5*game.mf.x;
+  this.r = 5;
   this.x = (game.w/2)-(this.r);
-  this.y = (game.h/2)+20*game.mf.y+this.r;
-  this.dirx = 3*game.mf.x;
-  this.diry = 3*game.mf.y;
-  this.speed = 1;
+  this.y = (game.h/2)+20+this.r;
+  this.dirx = 3;
+  this.diry = 3;
+  this.speed = 1.5;
 };
 
 Ball.prototype = {
@@ -31,9 +31,9 @@ Ball.prototype = {
   },
 
   changeAngle : function(paddle, mf) {
-    this.dirx = 12*mf.x*((this.x-(paddle.x+paddle.w/2))/paddle.w);
+    this.dirx = 12*((this.x-(paddle.x+paddle.w/2))/paddle.w);
     var norme = Math.sqrt((this.dirx*this.dirx)+(this.diry*this.diry));
-    this.diry = this.diry*6*mf.x/norme;
-    this.dirx = this.dirx*6*mf.x/norme;
+    this.diry = this.diry*6/norme;
+    this.dirx = this.dirx*6/norme;
   }
 };

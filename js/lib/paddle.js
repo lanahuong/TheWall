@@ -5,9 +5,9 @@
  **/
 
 var Paddle = function(game) {
-  this.w = 50*game.mf.x;
-  this.h = 10*game.mf.y;
-  this.y = game.h-this.h-70*game.mf.y;
+  this.w = 50;
+  this.h = 10;
+  this.y = game.h-this.h-70;
   this.x = (game.w/2)-(this.w/2);
   this.prevX = (game.w/2)-(this.w/2);
 };
@@ -23,7 +23,7 @@ Paddle.prototype = {
   },
 
   move : function(newX, game) {
-    if (newX-this.x <= 30*game.mf.x && newX-this.x >= -30*game.mf.x) {
+    if (newX-this.x <= 30 && newX-this.x >= -30) {
       this.prevX = this.x;
       this.x = newX;
 
