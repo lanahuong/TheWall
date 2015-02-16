@@ -43,7 +43,8 @@ function refresh() {
       if (collide == "corner") {
         game.ball.diry = -game.ball.diry;
         game.ball.dirx = -game.ball.dirx;
-        game.bricksTab[i].visible = false;
+        game.bricksTab[i].lives --;
+        game.bricksTab[i].numColor ++;
         game.pointsLevel += 2;
         game.points += 2;
         game.drawInfo();
@@ -63,7 +64,7 @@ function refresh() {
         game.bricksTab[i].lives --;
         game.bricksTab[i].numColor ++;
         game.pointsLevel += 2;
-        game.pointLevel +=2;
+        game.points +=2;
         game.drawInfo();
         game.sound_brick();
       }
@@ -77,7 +78,7 @@ function refresh() {
     }
   }
   
-  // Test if the player win
+  // Test if the player wins
   if (game.pointsLevel == game.levelsSetUp[game.currentLevel].points) {
     game.start = false;
     game.winMsg();
@@ -90,7 +91,7 @@ function refresh() {
     }
   }
   
-  // Test if the player lose
+  // Test if the player loses
   if (game.ball.y-game.ball.r > game.h-50) {
     game.start = false;
     

@@ -10,6 +10,8 @@ var Ball = function(game) {
   this.y = (game.h/2)+20+this.r;
   this.dirx = 3;
   this.diry = 3;
+  this.prevX = 0;
+  this.prevY = 0;
   this.speed = 1.5;
 };
 
@@ -26,6 +28,8 @@ Ball.prototype = {
   },
 
   move : function() {
+    this.prevX = this.x;
+    this.prevY = this.y;
     this.x += this.dirx*this.speed;
     this.y += this.diry*this.speed;
   },

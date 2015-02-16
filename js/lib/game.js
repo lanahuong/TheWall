@@ -264,27 +264,29 @@ Game.prototype = {
         this.ball.x <= brick.x+brick.w) {
       
       if (this.ball.y+this.ball.r >= brick.y &&
-          this.ball.y < brick.y) {
+          this.ball.y-this.ball.r <= brick.y) {
         return "top";
       }
       if (this.ball.y-this.ball.r <= brick.y+brick.h &&
-          this.ball.y > brick.y+brick.h) {
+          this.ball.y+this.ball.r >= brick.y+brick.h) {
         return "bottom";
       }
       
-    } else if (this.ball.y >= brick.y &&
+    }
+    
+    if (this.ball.y >= brick.y &&
                this.ball.y <= brick.y+brick.h) {
       
       if (this.ball.x+this.ball.r >= brick.x &&
-          this.ball.x < brick.x) {
+          this.ball.x-this.ball.r < brick.x) {
         return "left";
       } 
       if (this.ball.x-this.ball.r <= brick.x+brick.w &&
-          this.ball.x > brick.x+brick.w) {
+          this.ball.x+this.ball.r > brick.x+brick.w) {
         return "right";
       }
-      return null;
     }
+    return null;
   },
 
   drawInfo : function() {
