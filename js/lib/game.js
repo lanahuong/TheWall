@@ -137,9 +137,9 @@ Game.prototype = {
           brick = new Brick(this, x, y, levelArray[i][j]);
           this.bricksTab.push(brick);
         }
-        x += 32;
+        x += 32*this.mf.x;
       }
-      y += 15;
+      y += 15*this.mf.y;
     }
 
     //Determine the bonus
@@ -199,7 +199,7 @@ Game.prototype = {
     for (var j=0, d=this.bonusTab.length; j<d; j++) {
       var bonus = this.bonusTab[j];
       if(bonus.visible && !bonus.used){
-        var side = 13;
+        var side = 13*this.mf.y;
         this.context.drawImage(bonus.img, bonus.x+(bonus.img.width/2)-(side/2), bonus.y, side, side);
       }
       if(bonus.note === true){

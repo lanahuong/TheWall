@@ -12,7 +12,7 @@ var Bonus = function(type, msg, brick, num, game) {
     this.x = brick.x;
     this.y = brick.y;
     this.img = new Image();
-    switch(game.mf.x){
+    switch(window.devicePixelRatio){
       case 1:
         this.img.src = "../../resources/images/firefox_1x.png";
         break;

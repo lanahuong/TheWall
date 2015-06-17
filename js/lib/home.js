@@ -72,9 +72,9 @@ Home.prototype = {
           brick = new Brick(this, x, y, this.background[i][j]);
           this.bricksTab.push(brick);
         }
-        x += 32;
+        x += 32*this.mf.x;
       }
-      y += 15;
+      y += 15*this.mf.y;
     }
 
     this.drawHome();  
